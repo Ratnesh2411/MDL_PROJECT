@@ -1,0 +1,6 @@
+steps:
+  name: 'gcr.io/cloud-builders/pip'
+  args: ['intsall', '-r', 'requrments.txt']
+  name: 'python'
+  args: ['app.py']
+  
