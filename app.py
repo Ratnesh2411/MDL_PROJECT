@@ -7,7 +7,7 @@ from google.cloud import storage
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 # Initialize Flask app
-app = Flask(os.name)
+app = Flask(__name__)
 model = tf.keras.models.load_model('classifier/cifar10_model.h5')
 
 labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
