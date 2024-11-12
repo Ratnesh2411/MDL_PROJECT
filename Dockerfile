@@ -11,21 +11,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
+# Set the working directory
+WORKDIR /app
 
 # Copy requirements first
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir gunicorn google-cloud-storage
 
-# Set the working directory
-WORKDIR /app
-
 # Copy files
 COPY . .
-
-# Install dependencies
-RUN pip install -r requirements.txt
-RUN pip install --no-cache-dir gunicorn google-cloud-storage
 
 # Expose the port that the app will run on
 EXPOSE 8080
