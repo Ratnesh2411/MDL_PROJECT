@@ -3,7 +3,7 @@ FROM python:3.9-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=True
-ENV PORT=8000
+ENV PORT=8080
 ENV CUDA_VISIBLE_DEVICES=""
 
 # Set the working directory
@@ -14,9 +14,10 @@ COPY . .
 
 # Install dependencies
 RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir gunicorn google-cloud-storage
 
 # Expose the port that the app will run on
-EXPOSE 8000
+EXPOSE 8080
 
 # Run the application using JSON syntax
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8080", "app:app"]

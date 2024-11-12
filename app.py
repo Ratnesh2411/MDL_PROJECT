@@ -7,7 +7,7 @@ from google.cloud import storage
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(os.name)
 model = tf.keras.models.load_model('classifier/cifar10_model.h5')
 
 labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
@@ -18,6 +18,7 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+
     if 'image' not in request.files:
         return "No file uploaded", 400
 
@@ -32,9 +33,9 @@ def predict():
 
     return render_template('index.html', prediction=class_label, confidence=confidence)
 
-if __name__ == '__main__':
+if os.name == 'main':
     # Use the PORT environment variable or default to 8000
-    port = int(os.environ.get('PORT', 8000))
+    port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
 
 
