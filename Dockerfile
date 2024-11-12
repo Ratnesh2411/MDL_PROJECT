@@ -6,6 +6,17 @@ ENV PYTHONUNBUFFERED=True
 ENV PORT=8080
 ENV CUDA_VISIBLE_DEVICES=""
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir gunicorn
+
 # Set the working directory
 WORKDIR /app
 
