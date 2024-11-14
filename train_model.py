@@ -2,9 +2,15 @@
 import tensorflow as tf
 
 # Import specific modules for building the model and layers
+# Import the Sequential class to create a linear stack of neural network layers
 from tensorflow.keras.models import Sequential
+
+# Import layers for building a Convolutional Neural Network (CNN)
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+
+# Import the CIFAR-10 dataset which consists of 60,000 32x32 color images in 10 classes
 from tensorflow.keras.datasets import cifar10
+
 
 # Load the CIFAR-10 dataset (which consists of 60,000 32x32 color images in 10 classes)
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
