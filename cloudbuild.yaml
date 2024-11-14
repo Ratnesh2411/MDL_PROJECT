@@ -1,6 +1,8 @@
 steps:
-  name: 'gcr.io/cloud-builders/pip'
-  args: ['intsall', '-r', 'requrments.txt']
-  name: 'python'
-  args: ['app.py']
-  
+  # Step 1: Install dependencies from 'requirements.txt' using pip
+  - name: 'gcr.io/cloud-builders/pip'
+    args: ['install', '-r', 'requirements.txt']
+
+  # Step 2: Run the Python application
+  - name: 'python'
+    args: ['app.py']
